@@ -63,16 +63,25 @@
             <li class="nav-item ">
                 <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
             </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'password_change' %}">Change Password</a>
+            </li>
+
             {% if user_role.name == "product owner" %}
             <hr class="sidebar-divider">
             <li class="nav-item ">
                 <a class="nav-link" href="{% url 'new' %}">Create Issue</a>
             </li>
+
+            
             {% endif %}
             {% else %}
             <hr class="sidebar-divider">
             <li class="nav-item ">
                 <a class="nav-link" href="{% url 'login' %}">Log In</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'password_reset' %}">Forgot Password</a>
             </li>
 
             <hr class="sidebar-divider">
