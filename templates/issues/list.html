@@ -5,18 +5,109 @@
 {% block content %}
 
 <h1>Issues List</h1>
+{% if user.is_authenticated %}
+     {% if user_team %}
+     <h2>Team: {{ user_team }}</h2>
+    {% endif %}
+{% if user_role %}
+    <h2>Role: {{ user_role }} </h2>
+{% endif %}
+{% endif %}
+<div class="main_columns">
 
+    <div class="column column_to_do">
+        <h1>To do</h1>
+        {% for issue in object_list %}
+        {% if issue.status.name == "to do" and user.team.name == issue.assignee.team.name %}
+                <div class="card" >
+                    <div class="card-body">
+                        <h5 class="card-title">{{ issue.summary }}</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ issue.description }}</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ issue.status.name }}</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ issue.priority }}</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Assignee Team: {{ issue.assignee.team.name }}</h6>
+                    <!-- Display the team name of the reporter -->
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Reporter Team: {{ issue.reporter.team.name }}</h6>
 
-{% for issue in object_list %}
-  <div class="card" style="width: 30%;">
-    <div class="card-body">
-      <h5 class="card-title">{{ issue.summary }}</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">{{ issue.description }}</h6>
+                        <a href="{% url 'detail' issue.id %}" class="card-link">Continue reading..</a>
 
-    </div>
-  </div>
-
-  <br/>
+                        {% if user.is_authenticated %}
+                        {% if user_role.name == "scrum master" or user_role.name == "developer" %}
+                        | <a href="{% url 'edit' issue.id %}" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
+                        {% endif %}
+                        {% if user_role.name == "product owner" %}
+                        | <a href="{% url 'delete' issue.id %}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                        {% endif %}
+                        
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
         {% endfor %}
+    </div>
+
+    <div class="column column_progress">
+        <h1>In Progress</h1>
+        {% for issue in object_list %}
+            {% if issue.status.name == "in progress" and user.team.name == issue.assignee.team.name %}
+                <div class="card" >
+                    <div class="card-body">
+                        <h5 class="card-title">{{ issue.summary }}</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ issue.description }}</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ issue.status.name }}</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ issue.priority }}</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Assignee Team: {{ issue.assignee.team.name }}</h6>
+                        <!-- Display the team name of the reporter -->
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Reporter Team: {{ issue.reporter.team.name }}</h6>
+    
+                            <a href="{% url 'detail' issue.id %}" class="card-link">Continue reading..</a>
+    
+                            {% if user.is_authenticated %}
+                            {% if user_role.name == "scrum master" or user_role.name == "developer" %}
+                            | <a href="{% url 'edit' issue.id %}" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
+                            {% endif %}
+                            {% if user_role.name == "product owner" %}
+                            | <a href="{% url 'delete' issue.id %}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                            {% endif %}
+                            
+                            {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="column column_done">
+        <h1>Done</h1>
+        {% for issue in object_list %}
+            {% if issue.status.name == "done" %}
+                <div class="card" >
+                    <div class="card-body">
+                        <h5 class="card-title">{{ issue.summary }}</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ issue.description }}</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ issue.status.name }}</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ issue.priority }}</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Assignee Team: {{ issue.assignee.team.name }}</h6>
+                        <!-- Display the team name of the reporter -->
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Reporter Team: {{ issue.reporter.team.name }}</h6>
+    
+                            <a href="{% url 'detail' issue.id %}" class="card-link">Continue reading..</a>
+    
+                            {% if user.is_authenticated %}
+                            {% if user_role.name == "scrum master" or user_role.name == "developer" %}
+                            | <a href="{% url 'edit' issue.id %}" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></i></a>
+                            {% endif %}
+                            {% if user_role.name == "product owner" %}
+                            | <a href="{% url 'delete' issue.id %}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                            {% endif %}
+                            
+                            {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</div>
 
 {% endblock content %}

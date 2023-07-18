@@ -1,0 +1,45 @@
+
+.main_columns {
+    display: flex; 
+    justify-content: space-between; 
+    width: 100%;
+  }
+  
+
+  .column {
+    width: 50%; 
+    padding: 10px; 
+    border-radius: 8px;
+  }
+  
+
+  .column_to_do {
+    background-color: #e78282;
+  }
+  
+  .column_progress {
+    background-color: #d0da7b;
+    border-radius: 8px;
+  }
+  
+  .column_done {
+    background-color: #81d38f;
+    border-radius: 8px;
+  }
+  
+
+  .card {
+width: 100%;
+  }
+  
+  .team-style {
+
+}
+
+.team-style h2 {
+    /* Your styles for the h3 element inside the team-style div go here */
+    color: rgb(160, 160, 160); /* For example, we'll set the text color to red */
+    margin-left: 200%;
+    white-space: nowrap;
+}
+
