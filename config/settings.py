@@ -28,7 +28,7 @@ SECRET_KEY = '"SECRET_KEY"'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = env.bool("DEBUG", default=False)
-DEBUG = True
+DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com"]
 
@@ -142,9 +142,9 @@ EMAIL_BACKEND = "django.core.mail.backends.%s.EmailBackend" % (
     env.str("EMAIL_BACKEND", default = "smtp")
 )
 
-EMAIL_HOST = env.str("EMAIL_HOST")
-EMAIL_PORT = env.str("EMAIL_PORT")
-EMAIL_HOST_USER=env.str("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD=env.str("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL= env.str("DEFAULT_FROM_EMAIL")
-EMAIL_USE_TLS= True
+# EMAIL_HOST = env.str("EMAIL_HOST")
+# EMAIL_PORT = env.str("EMAIL_PORT")
+# EMAIL_HOST_USER=env.str("EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD=env.str("EMAIL_HOST_PASSWORD")
+# DEFAULT_FROM_EMAIL= env.str("DEFAULT_FROM_EMAIL")
+# EMAIL_USE_TLS= True
